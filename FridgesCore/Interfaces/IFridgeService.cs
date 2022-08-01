@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FridgesCore.Domain;
+using FridgesData.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,8 @@ namespace FridgesCore.Interfaces
 {
     public interface IFridgeService
     {
+        Task<IEnumerable<FridgeEntity>> GetAsync();
+        Task<Guid> AddAsync(Fridge fridge);
+        Task DeleteAsync(Guid id);
     }
 }

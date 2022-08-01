@@ -1,0 +1,12 @@
+D:\Programming\FridgesAPI\FridgesModel\bin\Debug\net6.0\FridgesModel.deps.json
+D:\Programming\FridgesAPI\FridgesModel\bin\Debug\net6.0\FridgesModel.dll
+D:\Programming\FridgesAPI\FridgesModel\bin\Debug\net6.0\FridgesModel.pdb
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.csproj.AssemblyReference.cache
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.AssemblyInfoInputs.cache
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.AssemblyInfo.cs
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.csproj.CoreCompileInputs.cache
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.dll
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\refint\FridgesModel.dll
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\FridgesModel.pdb
+D:\Programming\FridgesAPI\FridgesModel\obj\Debug\net6.0\ref\FridgesModel.dll

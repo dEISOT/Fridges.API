@@ -1,5 +1,10 @@
 using FridgesCore.Interfaces;
+using FridgesCore.Mapping.Profiles;
 using FridgesCore.Services;
+using FridgesData.Contexts;
+using FridgesData.Interfaces;
+using FridgesData.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IFridgeService, FridgeService>();
+builder.Services.AddScoped<IFridgeRepository, FridgeRepository>();
+builder.Services.AddScoped<IFridgeProductService, FridgeProductService>();
+builder.Services.AddScoped<IFridgeProductRepository, FridgeProductRepository>();
+builder.Services.AddAutoMapper(typeof(FridgeProfile));
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

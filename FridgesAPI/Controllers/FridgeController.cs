@@ -1,5 +1,8 @@
-﻿using FridgesCore.Interfaces;
+﻿using AutoMapper;
+using FridgesCore.Domain;
+using FridgesCore.Interfaces;
 using FridgesData.Entities;
+using FridgesModel.Request;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,41 +14,42 @@ namespace FridgesAPI.Controllers
     public class FridgeController : ControllerBase
     {
         private readonly IFridgeService _fridgeService;
+        private readonly IMapper _mapper;
 
-        public FridgeController(IFridgeService fridgeService)
+        public FridgeController(IFridgeService fridgeService, IMapper mapper)
         {
             _fridgeService = fridgeService;
+            _mapper = mapper;
         }
 
-        // GET: api/<FridgesController>
         [HttpGet]
-        public async Task<IEnumerable<FridgeEntity>> Get()
+        public async Task<IActionResult> Get()
         {
+            var result = await _fridgeService.GetAsync();
+            return Ok(result);
         }
 
-        // GET api/<FridgesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<FridgesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Add([FromBody] FridgeRequestModel request)
         {
+            var model = _mapper.Map<Fridge>(request);
+            return Ok(await _fridgeService.AddAsync(model));
         }
 
-        // PUT api/<FridgesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<FridgesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            try
+            {
+                await _fridgeService.DeleteAsync(id);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
     }
 }

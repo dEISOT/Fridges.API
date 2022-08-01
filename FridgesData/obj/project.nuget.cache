@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "X05LfqvRm/B/sv9euh3ib40Bye1BG4CeLhotE6zwFDU/4gZPI/NSoLhePAejHexN6HyNil7OyuwhBcMt5tBtog==",
+  "dgSpecHash": "p7HnsrgaRxbXotbIbcBD34FtTweR7bOSMOx1vGd0aiy34UqaBU5Ubmp7IQiDIrWZA4Y5NZPgAfrq0cJQiJDBmQ==",
   "success": true,
   "projectFilePath": "D:\\Programming\\FridgesAPI\\FridgesData\\FridgesData.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Администратор\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\Администратор\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.7\\microsoft.entityframeworkcore.6.0.7.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.7\\microsoft.entityframeworkcore.abstractions.6.0.7.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.7\\microsoft.entityframeworkcore.analyzers.6.0.7.nupkg.sha512",

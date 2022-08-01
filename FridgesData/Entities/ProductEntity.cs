@@ -11,5 +11,6 @@ namespace FridgesData.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int? DefaultQuantity { get; set; }
+        public virtual ICollection<FridgeProductEntity> FridgeProductEntities { get; set; }
     }
 }
