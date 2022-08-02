@@ -1,4 +1,6 @@
-﻿using FridgesData.Entities;
+﻿using FridgesCore.Domain;
+using FridgesData.Entities;
+using FridgesModel.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,10 @@ namespace FridgesCore.Interfaces
     public interface IFridgeProductService
     {
         Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId);
-        Task<FridgeProductEntity> Update(Guid id, int newQuantity);
+        Task<Guid> Add(AssortmentPutRequest AssortmentPutRequest);
+        Task<FridgeProductEntity> Update(Guid assortmentId, int newQuantity);
+        Task Delete(Guid assortmentId);
+        Task DeleteAll(Guid fridgeId);
+
     }
 }

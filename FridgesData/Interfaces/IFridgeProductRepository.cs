@@ -10,6 +10,10 @@ namespace FridgesData.Interfaces
     public interface IFridgeProductRepository
     {
         Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId);
-        Task<FridgeProductEntity> Update(Guid id, int newQuantity);
+        Task<FridgeProductEntity> Add(FridgeProductEntity entity);
+        Task<FridgeProductEntity> Update(Guid assortmentId, int newQuantity);
+        Task Delete(Guid assortmentId);
+        Task DeleteAll(Guid fridgeId);
+
     }
 }
