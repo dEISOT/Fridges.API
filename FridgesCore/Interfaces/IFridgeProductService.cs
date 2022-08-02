@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FridgesData.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace FridgesCore.Interfaces
 {
     public interface IFridgeProductService
     {
-        Task<IEnumerable<>>
+        Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId);
+        Task<FridgeProductEntity> Update(Guid id, int newQuantity);
     }
 }
