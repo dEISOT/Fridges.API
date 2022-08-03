@@ -50,5 +50,11 @@ namespace FridgesCore.Services
             var result = await _frideProductRepository.UpdateAsync(assortmentId, newQuantity);
             return result;
         }
+
+        public async Task FillingByDefault()
+        {
+            await _frideProductRepository.FillingByDefault();
+
+        }
     }
 }

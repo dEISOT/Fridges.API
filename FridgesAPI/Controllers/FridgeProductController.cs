@@ -71,5 +71,12 @@ namespace FridgesAPI.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> FillingByDefault()
+        {
+            await _fridgeproductService.FillingByDefault();
+            return Ok();
+        }
+
     }
 }

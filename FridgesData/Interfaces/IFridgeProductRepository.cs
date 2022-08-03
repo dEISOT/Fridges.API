@@ -14,6 +14,7 @@ namespace FridgesData.Interfaces
         Task<FridgeProductEntity> UpdateAsync(Guid assortmentId, int newQuantity);
         Task DeleteAsync(Guid assortmentId);
         Task DeleteAllAsync(Guid fridgeId);
+        Task FillingByDefault();
 
     }
 }

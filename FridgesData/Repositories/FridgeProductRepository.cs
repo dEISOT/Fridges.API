@@ -55,5 +55,11 @@ namespace FridgesData.Repositories
             await _db.SaveChangesAsync();
             return entity;
         }
+
+        public async Task FillingByDefault()
+        {
+            _db.FridgesProducts.FromSqlRaw("spFilling");
+            await _db.SaveChangesAsync();
+        }
     }
 }

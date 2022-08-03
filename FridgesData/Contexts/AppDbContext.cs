@@ -62,7 +62,7 @@ namespace FridgesData.Contexts
             modelBuilder.Entity<ProductEntity>().HasData(
                 new ProductEntity[]
                 {
-                    new ProductEntity{Id = new Guid("30e16fd7-78d1-4983-92d3-facbda7ea44a"), Name = "Apple"},
+                    new ProductEntity{Id = new Guid("30e16fd7-78d1-4983-92d3-facbda7ea44a"), Name = "Apple", DefaultQuantity = 1},
                     new ProductEntity{Id = new Guid("511b1236-e8b3-4e8f-8a42-90afb933e582"), Name = "Meat"},
                     new ProductEntity{Id = new Guid("a00a8c94-2e88-4d50-9489-eaac087bb8fe"), Name = "Milk"},
                     new ProductEntity{Id = new Guid("44e6123e-61f9-47ef-8ab2-9e1ab272b282"), Name = "Pear"},
