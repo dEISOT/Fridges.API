@@ -23,13 +23,13 @@ namespace FridgesAPI.Controllers
         [HttpGet("{fridgeId}")]
         public async Task<IActionResult> Get(Guid fridgeId)
         {
-            var reslut = await _fridgeproductService.GetProducts(fridgeId);
+            var reslut = await _fridgeproductService.GetProductsAsync(fridgeId);
             return Ok(reslut);
         }
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] AssortmentPutRequest model)
         {
-            var id = await _fridgeproductService.Add(model);
+            var id = await _fridgeproductService.AddAsync(model);
             return Ok(id);
         }
         [HttpPut]
@@ -37,7 +37,7 @@ namespace FridgesAPI.Controllers
         {
             var newQuantity = model.NewQuantity;
             var assortmentId = model.FridgeProductId;
-            var result = await _fridgeproductService.Update(assortmentId, newQuantity);
+            var result = await _fridgeproductService.UpdateAsync(assortmentId, newQuantity);
 
             return Ok(result);
         }
@@ -46,7 +46,7 @@ namespace FridgesAPI.Controllers
         {
             try
             {
-                await _fridgeproductService.Delete(assortmentId);
+                await _fridgeproductService.DeleteAsync(assortmentId);
                 return NoContent();
             }
             catch (Exception)
@@ -61,7 +61,7 @@ namespace FridgesAPI.Controllers
         {
             try
             {
-                await _fridgeproductService.DeleteAll(fridgeId);
+                await _fridgeproductService.DeleteAllAsync(fridgeId);
                 return NoContent();
             }
             catch (Exception)

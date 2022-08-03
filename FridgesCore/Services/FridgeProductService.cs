@@ -23,31 +23,31 @@ namespace FridgesCore.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> Add(AssortmentPutRequest assortment)
+        public async Task<Guid> AddAsync(AssortmentPutRequest assortment)
         {
             var entity = _mapper.Map<FridgeProductEntity>(assortment);
-            var result = await _frideProductRepository.Add(entity);
+            var result = await _frideProductRepository.AddAsync(entity);
             return result.Id;
         }
 
-        public async Task Delete(Guid assortmentId)
+        public async Task DeleteAsync(Guid assortmentId)
         {
-            await _frideProductRepository.Delete(assortmentId);
+            await _frideProductRepository.DeleteAsync(assortmentId);
         }
 
-        public async Task DeleteAll(Guid fridgeId)
+        public async Task DeleteAllAsync(Guid fridgeId)
         {
-            await _frideProductRepository.DeleteAll(fridgeId);
+            await _frideProductRepository.DeleteAllAsync(fridgeId);
         }
 
-        public async Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId)
+        public async Task<IEnumerable<FridgeProductEntity>> GetProductsAsync(Guid fridgeId)
         {
-            var products = await _frideProductRepository.GetProducts(fridgeId);
+            var products = await _frideProductRepository.GetProductsAsync(fridgeId);
             return products; 
         }
-        public async Task<FridgeProductEntity> Update(Guid assortmentId, int newQuantity)
+        public async Task<FridgeProductEntity> UpdateAsync(Guid assortmentId, int newQuantity)
         {
-            var result = await _frideProductRepository.Update(assortmentId, newQuantity);
+            var result = await _frideProductRepository.UpdateAsync(assortmentId, newQuantity);
             return result;
         }
     }

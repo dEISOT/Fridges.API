@@ -9,11 +9,11 @@ namespace FridgesData.Interfaces
 {
     public interface IFridgeProductRepository
     {
-        Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId);
-        Task<FridgeProductEntity> Add(FridgeProductEntity entity);
-        Task<FridgeProductEntity> Update(Guid assortmentId, int newQuantity);
-        Task Delete(Guid assortmentId);
-        Task DeleteAll(Guid fridgeId);
+        Task<IEnumerable<FridgeProductEntity>> GetProductsAsync(Guid fridgeId);
+        Task<FridgeProductEntity> AddAsync(FridgeProductEntity entity);
+        Task<FridgeProductEntity> UpdateAsync(Guid assortmentId, int newQuantity);
+        Task DeleteAsync(Guid assortmentId);
+        Task DeleteAllAsync(Guid fridgeId);
 
     }
 }

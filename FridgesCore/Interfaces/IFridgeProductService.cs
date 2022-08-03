@@ -11,11 +11,11 @@ namespace FridgesCore.Interfaces
 {
     public interface IFridgeProductService
     {
-        Task<IEnumerable<FridgeProductEntity>> GetProducts(Guid fridgeId);
-        Task<Guid> Add(AssortmentPutRequest AssortmentPutRequest);
-        Task<FridgeProductEntity> Update(Guid assortmentId, int newQuantity);
-        Task Delete(Guid assortmentId);
-        Task DeleteAll(Guid fridgeId);
+        Task<IEnumerable<FridgeProductEntity>> GetProductsAsync(Guid fridgeId);
+        Task<Guid> AddAsync(AssortmentPutRequest AssortmentPutRequest);
+        Task<FridgeProductEntity> UpdateAsync(Guid assortmentId, int newQuantity);
+        Task DeleteAsync(Guid assortmentId);
+        Task DeleteAllAsync(Guid fridgeId);
 
     }
 }
