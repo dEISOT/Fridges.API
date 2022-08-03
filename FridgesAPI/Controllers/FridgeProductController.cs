@@ -71,7 +71,7 @@ namespace FridgesAPI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("/filling-by-default")]
         public async Task<IActionResult> FillingByDefault()
         {
             await _fridgeproductService.FillingByDefault();
