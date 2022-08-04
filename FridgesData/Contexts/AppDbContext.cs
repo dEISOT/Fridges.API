@@ -99,6 +99,8 @@ namespace FridgesData.Contexts
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<FridgeTypeEntity> FridgeTypes { get; set; }
         public DbSet<FridgeProductEntity> FridgesProducts { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<UserCredentialsEntity> UserCredentials { get; set; }
 
     }
 }

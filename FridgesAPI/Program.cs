@@ -20,7 +20,9 @@ builder.Services.AddScoped<IFridgeProductService, FridgeProductService>();
 builder.Services.AddScoped<IFridgeProductRepository, FridgeProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddAutoMapper(typeof(FridgeProfile));
+builder.Services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AuthenticationProfile), typeof(ProductProfile), typeof(FridgeProductProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -34,6 +36,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
