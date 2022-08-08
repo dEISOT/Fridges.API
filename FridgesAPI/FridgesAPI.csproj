@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FridgesCore\FridgesCore.csproj" />
-    <ProjectReference Include="..\FridgesData\FridgesData.csproj" />
     <ProjectReference Include="..\FridgesModel\FridgesModel.csproj" />
   </ItemGroup>
 

@@ -2,11 +2,7 @@
 using FridgesCore.Domain;
 using FridgesData.Entities;
 using FridgesModel.Request;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FridgesModel.Response;
 
 namespace FridgesCore.Mapping.Profiles
 {
@@ -14,8 +10,8 @@ namespace FridgesCore.Mapping.Profiles
     {
         public AuthenticationProfile()
         {
-            CreateMap<RegisterRequest, User>();
-            CreateMap<UserEntity, User>();
+            CreateMap<AccountEntity, AuthenticateResponse>();
+            CreateMap<RegisterRequest, AccountEntity>();
         }
     }
 }

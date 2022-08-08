@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
-using FridgesCore.Domain;
 using FridgesCore.Interfaces;
 using FridgesData.Entities;
 using FridgesData.Interfaces;
 using FridgesModel.Request;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FridgesCore.Services
 {

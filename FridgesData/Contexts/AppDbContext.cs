@@ -1,10 +1,5 @@
 ﻿using FridgesData.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FridgesData.Contexts
 {
@@ -13,6 +8,7 @@ namespace FridgesData.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
         {
+            
             Database.EnsureCreated();
         }
 
@@ -99,8 +95,7 @@ namespace FridgesData.Contexts
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<FridgeTypeEntity> FridgeTypes { get; set; }
         public DbSet<FridgeProductEntity> FridgesProducts { get; set; }
-        public DbSet<UserEntity> Users { get; set; }
-        public DbSet<UserCredentialsEntity> UserCredentials { get; set; }
+        public DbSet<AccountEntity> Accounts { get; set; }
 
     }
 }

@@ -34,9 +34,6 @@
               "D:\\Programming\\FridgesAPI\\FridgesCore\\FridgesCore.csproj": {
                 "projectPath": "D:\\Programming\\FridgesAPI\\FridgesCore\\FridgesCore.csproj"
               },
-              "D:\\Programming\\FridgesAPI\\FridgesData\\FridgesData.csproj": {
-                "projectPath": "D:\\Programming\\FridgesAPI\\FridgesData\\FridgesData.csproj"
-              },
               "D:\\Programming\\FridgesAPI\\FridgesModel\\FridgesModel.csproj": {
                 "projectPath": "D:\\Programming\\FridgesAPI\\FridgesModel\\FridgesModel.csproj"
               }
@@ -159,6 +156,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

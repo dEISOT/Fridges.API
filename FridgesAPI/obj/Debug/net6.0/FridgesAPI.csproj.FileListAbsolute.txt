@@ -69,3 +69,5 @@ D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\AutoMapper.dll
 D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\FridgesModel.dll
 D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\FridgesModel.pdb
+D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\BCrypt.Net-Next.dll
+D:\Programming\FridgesAPI\FridgesAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
