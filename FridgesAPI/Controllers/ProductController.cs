@@ -2,10 +2,12 @@
 using FridgesCore.Domain;
 using FridgesCore.Interfaces;
 using FridgesModel.Request;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FridgesAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

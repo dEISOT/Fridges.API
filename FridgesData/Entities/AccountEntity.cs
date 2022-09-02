@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace FridgesData.Entities
 {
     public class AccountEntity
     {
-        [Key]
+        public AccountEntity()
+        {
+            RefreshTokens = new List<RefreshTokenEntity>();
+        }
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Role Role { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public List<RefreshTokenEntity> RefreshTokens { get; set; }
-        public bool OwnsToken(string token)
-        {
-            return this.RefreshTokens?.Find(x => x.Token == token) != null;
-        }
+        [JsonIgnore]
+        public virtual List<FridgeEntity> Fridges { get; set; }
+        [JsonIgnore]
+        public virtual List<RefreshTokenEntity> RefreshTokens { get; set; }
+        public string Role { get; set; }
     }
 }

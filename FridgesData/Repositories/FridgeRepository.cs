@@ -29,7 +29,7 @@ namespace FridgesData.Repositories
 
         public async Task<IEnumerable<FridgeEntity>> GetAsync()
         {
-            var result = await _db.Fridges.ToListAsync();
+            var result = await _db.Fridges.Include(f => f.AssortmentEntities).ToListAsync();
             return result;
         }
 

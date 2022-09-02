@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FridgesAPI.Controllers.Base;
 using FridgesCore.Domain;
 using FridgesCore.Interfaces;
 using FridgesData.Entities;
@@ -11,23 +10,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FridgesAPI.Controllers
 {
+    [Authorize]
     [ApiController]
-
     [Route("[controller]")]
-    public class FridgeController : BaseController
+    public class FridgeController : ControllerBase
     {
         private readonly IFridgeService _fridgeService;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public FridgeController(IFridgeService fridgeService, IMapper mapper)
+        public FridgeController(IFridgeService fridgeService, ITokenService tokenService, IMapper mapper)
         {
             _fridgeService = fridgeService;
+            _tokenService = tokenService;
             _mapper = mapper;
         }
-        [Authorize(Role.Admin)]
+
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string AccessToken)
         {
+            var claims = _tokenService.DecodeJwtToken(AccessToken);
             var result = await _fridgeService.GetAsync();
             return Ok(result);
         }

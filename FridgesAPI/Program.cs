@@ -4,8 +4,11 @@ using FridgesCore.Services;
 using FridgesData.Contexts;
 using FridgesData.Interfaces;
 using FridgesData.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,18 +17,37 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateActor = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+        ClockSkew = TimeSpan.Zero
+    };
+
+});
+builder.Services.AddCors();
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<IFridgeService, FridgeService>();
 builder.Services.AddScoped<IFridgeRepository, FridgeRepository>();
-builder.Services.AddScoped<IFridgeProductService, FridgeProductService>();
-builder.Services.AddScoped<IFridgeProductRepository, FridgeProductRepository>();
+builder.Services.AddScoped<IAssortmentService, AssortmentService>();
+builder.Services.AddScoped<IAssortmentRepository, AssortmentRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddTransient<IAccountsService, AccountsService>();
-builder.Services.AddTransient<IAccountsRepository, AccountsRepository>();
-builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AuthenticationProfile), typeof(ProductProfile), typeof(FridgeProductProfile));
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AccountProfile), typeof(ProductProfile), typeof(AssortmentProfile));
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                                                              );
 
 builder.Services.AddSwaggerGen(option =>
 {
@@ -64,6 +86,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
