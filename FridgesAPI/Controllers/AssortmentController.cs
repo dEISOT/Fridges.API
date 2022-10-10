@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FridgesAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AssortmentController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace FridgesAPI.Controllers
         [HttpGet("{fridgeId}")]
         public async Task<IActionResult> Get(Guid fridgeId)
         {
-            var reslut = await _assortmentService.GetProductsAsync(fridgeId);
+            var reslut = await _assortmentService.GetAsync(fridgeId);
             return Ok(reslut);
         }
         [HttpPost]

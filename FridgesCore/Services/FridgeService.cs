@@ -9,15 +9,23 @@ namespace FridgesCore.Services
     public class FridgeService : IFridgeService
     {
         private readonly IFridgeRepository _fridgeRepository;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        public FridgeService(IFridgeRepository fridgeRepository, IMapper mapper)
+
+        public FridgeService(IFridgeRepository fridgeRepository, ITokenService tokenService, IMapper mapper)
         {
             _fridgeRepository = fridgeRepository;
-            _mapper = mapper;  
+            _tokenService = tokenService;
+            _mapper = mapper;
         }
 
-        public async Task<Guid> AddAsync(Fridge fridge)
+        public async Task<Guid> AddAsync(Fridge fridge, string accessToken)
         {
+            var principal = _tokenService.DecodeJwtToken(accessToken);
+            var claims = principal.Claims.ToArray();
+            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == "Id").Value);
+            fridge.AccountId = id;
+
             var entity = _mapper.Map<FridgeEntity>(fridge);
             var result = await _fridgeRepository.AddAsync(entity);
             return result;
@@ -41,9 +49,12 @@ namespace FridgesCore.Services
             }
         }
 
-        public async Task<IEnumerable<FridgeEntity>> GetAsync()
+        public async Task<IEnumerable<FridgeEntity>> GetAsync(string accessToken)
         {
-            var result = await _fridgeRepository.GetAsync();
+            var principal = _tokenService.DecodeJwtToken(accessToken);
+            var claims = principal.Claims.ToArray();
+            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == "Id").Value);
+            var result = await _fridgeRepository.GetAsync(id);
             return result;
         }
 

@@ -16,30 +16,31 @@ namespace FridgesAPI.Controllers
     public class FridgeController : ControllerBase
     {
         private readonly IFridgeService _fridgeService;
-        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public FridgeController(IFridgeService fridgeService, ITokenService tokenService, IMapper mapper)
+        public FridgeController(IFridgeService fridgeService, IMapper mapper)
         {
             _fridgeService = fridgeService;
-            _tokenService = tokenService;
             _mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Get(string AccessToken)
+        public async Task<IActionResult> Get()
         {
-            var claims = _tokenService.DecodeJwtToken(AccessToken);
-            var result = await _fridgeService.GetAsync();
+            var accessToken = Request.Cookies["accessToken"];
+            var result = await _fridgeService.GetAsync(accessToken);
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] FridgeRequestModel request)
         {
+            var accessToken = Request.Cookies["accessToken"];
             var model = _mapper.Map<Fridge>(request);
-            return Ok(await _fridgeService.AddAsync(model));
+
+            var fridgeId = await _fridgeService.AddAsync(model, accessToken);
+            return Ok(fridgeId);
         }
 
         [HttpDelete("{id}")]

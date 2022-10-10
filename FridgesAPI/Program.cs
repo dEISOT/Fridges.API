@@ -31,7 +31,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ClockSkew = TimeSpan.Zero
     };
 
+}).AddCookie(options =>
+{
+    options.Cookie.HttpOnly = false;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.Name = "jopa";
+    options.Cookie.SameSite = SameSiteMode.Strict;
+});
+
 builder.Services.AddCors();
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IFridgeService, FridgeService>();

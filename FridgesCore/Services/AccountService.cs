@@ -11,12 +11,14 @@ namespace FridgesCore.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly ITokenService _tokenService;
+        private readonly ITokenRepository _tokenRepository;
         private readonly IMapper _mapper;
 
-        public AccountService(IAccountRepository accountRepository, ITokenService tokenService, IMapper mapper)
+        public AccountService(IAccountRepository accountRepository, ITokenService tokenService, ITokenRepository tokenRepository, IMapper mapper)
         {
             _accountRepository = accountRepository;
             _tokenService = tokenService;
+            _tokenRepository = tokenRepository;
             _mapper = mapper;
         }
 
@@ -36,6 +38,12 @@ namespace FridgesCore.Services
 
             var result = await _tokenService.GenerateTokensAsync(model);
             return result;
+        }
+
+        public async Task LogoutAsync(string refreshToken)
+        {
+            var entity = await _tokenRepository.TryGetTokenAsync(refreshToken);
+            await _tokenRepository.DeleteAsync(entity);  
         }
 
         public async Task<Guid> RegisterAsync(RegisterRequest request)

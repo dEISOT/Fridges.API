@@ -6,5 +6,6 @@ namespace FridgesData.Interfaces
     {
         Task<AccountEntity> FindByEmailAsync(string email);
         Task<Guid> AddAsync(AccountEntity account);
+        
     }
 }

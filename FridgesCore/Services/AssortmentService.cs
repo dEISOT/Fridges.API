@@ -36,9 +36,9 @@ namespace FridgesCore.Services
         /*
          
         */
-        public async Task<IEnumerable<AssortmentEntity>> GetProductsAsync(Guid fridgeId)
+        public async Task<IEnumerable<AssortmentEntity>> GetAsync(Guid fridgeId)
         {
-            var products = await _assortmentRepository.GetProductsAsync(fridgeId);
+            var products = await _assortmentRepository.GetAsync(fridgeId);
             return products;
         }
         public async Task<AssortmentEntity> UpdateAsync(Guid assortmentId, int newQuantity)

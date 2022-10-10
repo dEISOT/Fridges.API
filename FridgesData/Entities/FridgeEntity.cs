@@ -10,6 +10,8 @@ namespace FridgesData.Entities
         public Guid TypeId { get; set; }
         public Guid AccountId { get; set; }
         [JsonIgnore]
+        public virtual AccountEntity Account { get; set; }
+        [JsonIgnore]
         public virtual FridgeTypeEntity FridgeType { get; set; }
         [JsonIgnore]
         public virtual ICollection<AssortmentEntity> AssortmentEntities { get; set; }

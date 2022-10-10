@@ -9,8 +9,7 @@ namespace FridgesData.Contexts
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            Database.EnsureCreated();   
         }
 
    
@@ -79,11 +78,11 @@ namespace FridgesData.Contexts
             modelBuilder.Entity<FridgeEntity>().HasData(
                 new FridgeEntity[]
                 {
-                    new FridgeEntity{Id = new Guid("bd38f93f-93b7-4b7c-9b9d-2e6a9e2df441"), Name = "1.1", TypeId = new Guid("2f48bed2-c5ba-48c9-aca3-1639f75ada10") },
-                    new FridgeEntity{Id = new Guid("f08d94df-36c1-49cb-a038-2b8249272e6a"), Name = "2.1", TypeId = new Guid("a6b022e2-53e0-4dfe-943a-73cb99ebd5ec") },
-                    new FridgeEntity{Id = new Guid("b92bd99d-a6e6-4d4d-9571-c36c479e67e0"), Name = "3.1", TypeId = new Guid("64194695-dce1-4f19-b2ff-0a44a00221bc") },
-                    new FridgeEntity{Id = new Guid("9a97645c-1ad6-403e-87eb-bc4fa46a3bce"), Name = "4.1", TypeId = new Guid("25166c30-161b-4abf-b84a-4f911b3c7e8d") },
-                    new FridgeEntity{Id = new Guid("39f2a3d3-ef45-470e-b7c4-edd099b21a3b"), Name = "5.1", TypeId = new Guid("af831ce2-35f2-4939-a1ce-2ce872b48393") },
+                    new FridgeEntity{Id = new Guid("bd38f93f-93b7-4b7c-9b9d-2e6a9e2df441"), Name = "1.1", TypeId = new Guid("2f48bed2-c5ba-48c9-aca3-1639f75ada10"), AccountId = new Guid("c68b01a0-3bc6-4c84-a2f9-3aa04768cf80")},
+                    new FridgeEntity{Id = new Guid("f08d94df-36c1-49cb-a038-2b8249272e6a"), Name = "2.1", TypeId = new Guid("a6b022e2-53e0-4dfe-943a-73cb99ebd5ec"), AccountId = new Guid("c68b01a0-3bc6-4c84-a2f9-3aa04768cf80") },
+                    new FridgeEntity{Id = new Guid("b92bd99d-a6e6-4d4d-9571-c36c479e67e0"), Name = "3.1", TypeId = new Guid("64194695-dce1-4f19-b2ff-0a44a00221bc"), AccountId = new Guid("c68b01a0-3bc6-4c84-a2f9-3aa04768cf80") },
+                    new FridgeEntity{Id = new Guid("9a97645c-1ad6-403e-87eb-bc4fa46a3bce"), Name = "4.1", TypeId = new Guid("25166c30-161b-4abf-b84a-4f911b3c7e8d"), AccountId = new Guid("c68b01a0-3bc6-4c84-a2f9-3aa04768cf80") },
+                    new FridgeEntity{Id = new Guid("39f2a3d3-ef45-470e-b7c4-edd099b21a3b"), Name = "5.1", TypeId = new Guid("af831ce2-35f2-4939-a1ce-2ce872b48393"), AccountId = new Guid("c68b01a0-3bc6-4c84-a2f9-3aa04768cf80") },
                 });
 
             modelBuilder.Entity<AssortmentEntity>().HasData(

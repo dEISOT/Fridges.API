@@ -5,8 +5,8 @@ namespace FridgesCore.Interfaces
 {
     public interface IFridgeService
     {
-        Task<IEnumerable<FridgeEntity>> GetAsync();
-        Task<Guid> AddAsync(Fridge fridge);
+        Task<IEnumerable<FridgeEntity>> GetAsync(string accessToken);
+        Task<Guid> AddAsync(Fridge fridge, string accessToken);
         Task DeleteAsync(Guid id);
     }
 }

@@ -27,9 +27,9 @@ namespace FridgesData.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<FridgeEntity>> GetAsync()
+        public async Task<IEnumerable<FridgeEntity>> GetAsync(Guid accountId)
         {
-            var result = await _db.Fridges.Include(f => f.AssortmentEntities).ToListAsync();
+            var result = await _db.Fridges.Where(f => f.AccountId == accountId).ToListAsync();
             return result;
         }
 

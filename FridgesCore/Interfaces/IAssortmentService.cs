@@ -5,7 +5,7 @@ namespace FridgesCore.Interfaces
 {
     public interface IAssortmentService
     {
-        Task<IEnumerable<AssortmentEntity>> GetProductsAsync(Guid fridgeId);
+        Task<IEnumerable<AssortmentEntity>> GetAsync(Guid fridgeId);
         Task<Guid> AddAsync(AssortmentPutRequest AssortmentPutRequest);
         Task<AssortmentEntity> UpdateAsync(Guid assortmentId, int newQuantity);
         Task DeleteAsync(Guid assortmentId);

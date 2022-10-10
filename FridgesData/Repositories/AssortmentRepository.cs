@@ -13,7 +13,7 @@ namespace FridgesData.Repositories
             _db = db;
         }
 
-        public async Task<IEnumerable<AssortmentEntity>> GetProductsAsync(Guid fridgeId)
+        public async Task<IEnumerable<AssortmentEntity>> GetAsync(Guid fridgeId)
         {
             var products = await _db.Assortments.Where(p => p.FridgeId == fridgeId).ToListAsync();
             return products;

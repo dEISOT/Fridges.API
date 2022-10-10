@@ -29,10 +29,8 @@ namespace FridgesCore.Services
             var role = account.Role;
             var claims = new[]
             {
-                new Claim("Email", account.Email),
                 new Claim(ClaimTypes.Role, role),
-                new Claim("Id", account.Id.ToString()),
-                new Claim("Email", account.Email)
+                new Claim("Id", account.Id.ToString())
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

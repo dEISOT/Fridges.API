@@ -1,12 +1,13 @@
 ﻿using FridgesCore.Interfaces;
 using FridgesModel.Request;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FridgesAPI.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace FridgesAPI.Controllers
             _accountService = accountService;
             _tokenService = tokenService;
         }
+
 
         [AllowAnonymous]
         [HttpPost]
@@ -31,8 +33,19 @@ namespace FridgesAPI.Controllers
             //validation for credentials
 
             var result = await _accountService.AuthenticateAsync(request);
-            
-            return Ok(result);
+            HttpContext.Response.Cookies.Append("accessToken", result.AccessToken.ToString(),
+                new CookieOptions
+                {
+                    Secure = true,
+                    HttpOnly = false,
+                });
+            HttpContext.Response.Cookies.Append("refreshToken", result.RefreshToken,
+                new CookieOptions
+                {
+                    Secure = true,
+                    HttpOnly = false,
+                });
+            return Ok();
         }
 
         [AllowAnonymous]
@@ -49,7 +62,7 @@ namespace FridgesAPI.Controllers
 
                 return Ok(jwtResult);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -69,6 +82,16 @@ namespace FridgesAPI.Controllers
 
             return Ok(accountId);
 
+        }
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var token = HttpContext.Request.Cookies["refreshToken"];
+            await _accountService.LogoutAsync(token);
+            HttpContext.Response.Cookies.Delete("refreshToken");
+            HttpContext.Response.Cookies.Delete("accessToken");
+
+            return NoContent();
         }
     }
 }

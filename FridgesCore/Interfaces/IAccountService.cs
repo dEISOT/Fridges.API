@@ -7,5 +7,6 @@ namespace FridgesCore.Interfaces
     {
         Task<LoginResponse> AuthenticateAsync(LoginRequest request);
         Task<Guid> RegisterAsync(RegisterRequest request);
+        Task LogoutAsync(string token);
     }
 }
