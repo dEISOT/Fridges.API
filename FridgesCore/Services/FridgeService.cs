@@ -3,6 +3,8 @@ using FridgesCore.Domain;
 using FridgesCore.Interfaces;
 using FridgesData.Entities;
 using FridgesData.Interfaces;
+using FridgesModel.Response;
+using System.Security.Claims;
 
 namespace FridgesCore.Services
 {
@@ -23,7 +25,7 @@ namespace FridgesCore.Services
         {
             var principal = _tokenService.DecodeJwtToken(accessToken);
             var claims = principal.Claims.ToArray();
-            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == "Id").Value);
+            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             fridge.AccountId = id;
 
             var entity = _mapper.Map<FridgeEntity>(fridge);
@@ -49,13 +51,25 @@ namespace FridgesCore.Services
             }
         }
 
-        public async Task<IEnumerable<FridgeEntity>> GetAsync(string accessToken)
+        public async Task<IEnumerable<FridgeResponse>> GetAsync(string id)
         {
-            var principal = _tokenService.DecodeJwtToken(accessToken);
-            var claims = principal.Claims.ToArray();
-            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == "Id").Value);
-            var result = await _fridgeRepository.GetAsync(id);
-            return result;
+            //var principal = _tokenService.DecodeJwtToken(accessToken);
+            //var claims = principal.Claims.ToArray();
+            Guid Id = new Guid(id);
+            var entities = await _fridgeRepository.GetAsync(Id);
+            List<FridgeResponse> fridges = new List<FridgeResponse>();
+            foreach (var entity in entities)
+            {
+                FridgeResponse item = new FridgeResponse()
+                {
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    AccountName = entity.Account.Email,
+                    Type = entity.FridgeType.Name
+                };
+                fridges.Add(item);
+            }
+            return fridges;
         }
 
     }

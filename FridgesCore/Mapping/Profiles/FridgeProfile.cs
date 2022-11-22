@@ -2,6 +2,7 @@
 using FridgesCore.Domain;
 using FridgesData.Entities;
 using FridgesModel.Request;
+using FridgesModel.Response;
 
 namespace FridgesCore.Mapping.Profiles
 {
@@ -11,6 +12,7 @@ namespace FridgesCore.Mapping.Profiles
         {
             CreateMap<FridgeRequestModel, Fridge>();
             CreateMap<Fridge, FridgeEntity>();
+            CreateMap<FridgeEntity, FridgeResponse>();
         }
     }
 }

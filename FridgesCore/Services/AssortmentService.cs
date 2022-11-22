@@ -3,17 +3,20 @@ using FridgesCore.Interfaces;
 using FridgesData.Entities;
 using FridgesData.Interfaces;
 using FridgesModel.Request;
+using FridgesModel.Response;
 
 namespace FridgesCore.Services
 {
     public class AssortmentService : IAssortmentService
     {
         private readonly IAssortmentRepository _assortmentRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
 
-        public AssortmentService(IAssortmentRepository frideProductRepository, IMapper mapper)
+        public AssortmentService(IAssortmentRepository assortmentRepository, IProductRepository productRepository, IMapper mapper)
         {
-            _assortmentRepository = frideProductRepository;
+            _assortmentRepository = assortmentRepository;
+            _productRepository = productRepository;
             _mapper = mapper;
         }
 
@@ -36,10 +39,22 @@ namespace FridgesCore.Services
         /*
          
         */
-        public async Task<IEnumerable<AssortmentEntity>> GetAsync(Guid fridgeId)
+        public async Task<IEnumerable<AssortmentResponse>> GetAsync(Guid fridgeId)
         {
-            var products = await _assortmentRepository.GetAsync(fridgeId);
-            return products;
+            var entities = await _assortmentRepository.GetAsync(fridgeId);
+            var products = await _productRepository.GetAsync();
+            List<AssortmentResponse> result = new List<AssortmentResponse>();
+            foreach(var entity in entities)
+            {
+                AssortmentResponse item = new AssortmentResponse()
+                {
+                    Id = entity.Id,
+                    Name = products.FirstOrDefault(p => p.Id == entity.ProductId).Name,
+                    Quantity = entity.Quantity,
+                };
+                result.Add(item);
+            }    
+            return result;
         }
         public async Task<AssortmentEntity> UpdateAsync(Guid assortmentId, int newQuantity)
         {

@@ -12,9 +12,9 @@ namespace FridgesAPI.Controllers
         private readonly IAssortmentService _assortmentService;
         private readonly IMapper _mapper;
 
-        public AssortmentController(IAssortmentService fridgeProductService, IMapper mapper)
+        public AssortmentController(IAssortmentService assortmentService, IMapper mapper)
         {
-            _assortmentService = fridgeProductService;
+            _assortmentService = assortmentService;
             _mapper = mapper;
         }
 

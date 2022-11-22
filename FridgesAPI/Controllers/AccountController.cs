@@ -1,5 +1,7 @@
 ﻿using FridgesCore.Interfaces;
 using FridgesModel.Request;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +47,7 @@ namespace FridgesAPI.Controllers
                     Secure = true,
                     HttpOnly = false,
                 });
-            return Ok();
+            return Ok(result);
         }
 
         [AllowAnonymous]

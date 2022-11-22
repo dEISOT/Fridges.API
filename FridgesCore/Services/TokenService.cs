@@ -30,10 +30,14 @@ namespace FridgesCore.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.Role, role),
-                new Claim("Id", account.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            ClaimsIdentity identity = new ClaimsIdentity(claims);
+
+          
+
+            //var tokenHandler = new JwtSecurityTokenHandler();
             // Get secret phrase from configuration
             var secret = _configuration.GetValue<string>("JWT:Secret");
             // Get expiration minutes from configuration
@@ -41,16 +45,27 @@ namespace FridgesCore.Services
             // Encode secrets
             var key = Encoding.UTF8.GetBytes(secret);
             // Set JWT description using user id and user role
-            var JwtToken = new JwtSecurityToken(
+            /*var JwtToken = new JwtSecurityToken(
                 _configuration.GetValue<string>("JWT:Issuer"),
                 _configuration.GetValue<string>("JWT:Audience"),
-                claims,
                 expires: DateTime.UtcNow.AddMinutes(JwtTokenExpiration),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
                 );
-            var accessToken = new JwtSecurityTokenHandler().WriteToken(JwtToken);
+            */
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Audience = _configuration.GetValue<string>("JWT:Audience"),
+                Issuer = _configuration.GetValue<string>("JWT:Issuer"),
+                Subject = identity,
+                Expires = DateTime.UtcNow.AddMinutes(JwtTokenExpiration),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var accessTokenRaw = tokenHandler.CreateToken(tokenDescriptor);
+            var accessToken = tokenHandler.WriteToken(accessTokenRaw);
 
             var refreshToken = new RefreshTokenEntity
             {
