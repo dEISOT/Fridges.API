@@ -25,7 +25,7 @@ namespace FridgesAPI.Controllers
             return Ok(reslut);
         }
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AssortmentPutRequest model)
+        public async Task<IActionResult> Add([FromBody] AssortmentPostRequest model)
         {
             var id = await _assortmentService.AddAsync(model);
             return Ok(id);
@@ -34,7 +34,7 @@ namespace FridgesAPI.Controllers
         public async Task<IActionResult> Update([FromBody] AssortmentUpdateRequset model)
         {
             var newQuantity = model.NewQuantity;
-            var assortmentId = model.FridgeProductId;
+            var assortmentId = model.AssortmentId;
             var result = await _assortmentService.UpdateAsync(assortmentId, newQuantity);
 
             return Ok(result);
@@ -69,7 +69,7 @@ namespace FridgesAPI.Controllers
             }
         }
 
-        [HttpGet("/filling-by-default")]
+        [HttpGet("filling-by-default")]
         public async Task<IActionResult> FillingByDefault()
         {
             await _assortmentService.FillingByDefault();

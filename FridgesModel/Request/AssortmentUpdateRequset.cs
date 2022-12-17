@@ -2,7 +2,7 @@
 {
     public class AssortmentUpdateRequset
     {
-        public Guid FridgeProductId { get; set; }
+        public Guid AssortmentId { get; set; }
         public int NewQuantity { get; set; }
 
     }

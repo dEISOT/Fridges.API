@@ -9,8 +9,8 @@ namespace FridgesCore.Mapping.Profiles
     {
         public AssortmentProfile()
         {
-            CreateMap<AssortmentPutRequest, Assortment>();
-            CreateMap<AssortmentPutRequest, AssortmentEntity>();
+            CreateMap<AssortmentPostRequest, Assortment>();
+            CreateMap<AssortmentPostRequest, AssortmentEntity>();
             CreateMap<Assortment, AssortmentEntity>();
 
         }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FridgesCore.Domain;
 using FridgesCore.Interfaces;
 using FridgesData.Entities;
 using FridgesData.Interfaces;
@@ -20,7 +21,7 @@ namespace FridgesCore.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> AddAsync(AssortmentPutRequest assortment)
+        public async Task<Guid> AddAsync(AssortmentPostRequest assortment)
         {
             var entity = _mapper.Map<AssortmentEntity>(assortment);
             var result = await _assortmentRepository.AddAsync(entity);
@@ -39,12 +40,13 @@ namespace FridgesCore.Services
         /*
          
         */
-        public async Task<IEnumerable<AssortmentResponse>> GetAsync(Guid fridgeId)
+        public async Task<AssortmentResponseWithProducts> GetAsync(Guid fridgeId)
         {
             var entities = await _assortmentRepository.GetAsync(fridgeId);
             var products = await _productRepository.GetAsync();
-            List<AssortmentResponse> result = new List<AssortmentResponse>();
-            foreach(var entity in entities)
+
+            List<AssortmentResponse> assortment = new List<AssortmentResponse>();
+            foreach (var entity in entities)
             {
                 AssortmentResponse item = new AssortmentResponse()
                 {
@@ -52,8 +54,13 @@ namespace FridgesCore.Services
                     Name = products.FirstOrDefault(p => p.Id == entity.ProductId).Name,
                     Quantity = entity.Quantity,
                 };
-                result.Add(item);
-            }    
+                assortment.Add(item);
+            }
+
+            AssortmentResponseWithProducts result = new AssortmentResponseWithProducts();
+            result.AssortmentList = assortment;
+            result.ProductList = products;
+
             return result;
         }
         public async Task<AssortmentEntity> UpdateAsync(Guid assortmentId, int newQuantity)

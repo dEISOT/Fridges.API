@@ -1,6 +1,6 @@
 ﻿namespace FridgesModel.Request
 {
-    public class AssortmentPutRequest
+    public class AssortmentPostRequest
     {
         public Guid FridgeId { get; set; }
         public Guid ProductId { get; set; }

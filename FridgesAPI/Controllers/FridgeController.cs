@@ -24,8 +24,6 @@ namespace FridgesAPI.Controllers
             _mapper = mapper;
         }
 
-
-        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -44,7 +42,7 @@ namespace FridgesAPI.Controllers
             var fridgeId = await _fridgeService.AddAsync(model, accessToken);
             return Ok(fridgeId);
         }
-
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

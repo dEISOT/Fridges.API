@@ -35,18 +35,18 @@ namespace FridgesAPI.Controllers
             //validation for credentials
 
             var result = await _accountService.AuthenticateAsync(request);
-            HttpContext.Response.Cookies.Append("accessToken", result.AccessToken.ToString(),
-                new CookieOptions
-                {
-                    Secure = true,
-                    HttpOnly = false,
-                });
-            HttpContext.Response.Cookies.Append("refreshToken", result.RefreshToken,
-                new CookieOptions
-                {
-                    Secure = true,
-                    HttpOnly = false,
-                });
+            //HttpContext.Response.Cookies.Append("accessToken", result.AccessToken.ToString(),
+            //    new CookieOptions
+            //    {
+            //        Secure = true,
+            //        HttpOnly = false,
+            //    });
+            //HttpContext.Response.Cookies.Append("refreshToken", result.RefreshToken,
+            //    new CookieOptions
+            //    {
+            //        Secure = true,
+            //        HttpOnly = false,
+            //    });
             return Ok(result);
         }
 
@@ -85,14 +85,11 @@ namespace FridgesAPI.Controllers
             return Ok(accountId);
 
         }
-        [HttpGet("logout")]
-        public async Task<IActionResult> Logout()
+       
+        [HttpGet("logout/{refreshToken}")]
+        public async Task<IActionResult> Logout(string refreshToken)
         {
-            var token = HttpContext.Request.Cookies["refreshToken"];
-            await _accountService.LogoutAsync(token);
-            HttpContext.Response.Cookies.Delete("refreshToken");
-            HttpContext.Response.Cookies.Delete("accessToken");
-
+            await _accountService.LogoutAsync(refreshToken);
             return NoContent();
         }
     }
