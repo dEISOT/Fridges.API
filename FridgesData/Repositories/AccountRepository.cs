@@ -20,9 +20,15 @@ namespace FridgesData.Repositories
             return account.Id;
         }
 
-        public Task<AccountEntity> FindByEmailAsync(string email)
+        public async Task<AccountEntity> FindByEmailAsync(string email)
         {
-            var response = _db.Accounts.FirstOrDefaultAsync(a => string.Equals(a.Email, email));
+            var response = await _db.Accounts.FirstOrDefaultAsync(a => string.Equals(a.Email, email));
+            return response;
+        }
+
+        public async Task<AccountEntity> FindByIdAsync(Guid id)
+        {
+            var response = await _db.Accounts.FirstOrDefaultAsync(a => a.Id == id);
             return response;
         }
     }

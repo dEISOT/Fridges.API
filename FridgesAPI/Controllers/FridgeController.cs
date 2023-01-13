@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FridgesCore.Domain;
 using FridgesCore.Interfaces;
+using FridgesData.Entities;
 using FridgesModel.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ namespace FridgesAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class FridgeController : ControllerBase
+    public class FridgeController : BaseController
     {
         private readonly IFridgeService _fridgeService;
         private readonly IMapper _mapper;
@@ -25,11 +26,12 @@ namespace FridgesAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] FridgeParameters fridgeParameters)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-            var result = await _fridgeService.GetAsync(userId);
+            var result = await _fridgeService.GetAsync(userId, fridgeParameters);
+
             return Ok(result);
         }
 
@@ -37,9 +39,10 @@ namespace FridgesAPI.Controllers
         public async Task<IActionResult> Add([FromBody] FridgeRequestModel request)
         {
             var accessToken = Request.Cookies["accessToken"];
+            
             var model = _mapper.Map<Fridge>(request);
 
-            var fridgeId = await _fridgeService.AddAsync(model, accessToken);
+            var fridgeId = await _fridgeService.AddAsync(model, UserId);
             return Ok(fridgeId);
         }
         

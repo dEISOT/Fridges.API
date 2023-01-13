@@ -106,7 +106,7 @@ namespace FridgesCore.Services
                 {
                     ValidateActor = true,
                     ValidateAudience = true,
-                    ValidateLifetime = true,
+                    ValidateLifetime = false,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = _configuration["Jwt:Issuer"],
                     ValidAudience = _configuration["Jwt:Audience"],
@@ -132,8 +132,9 @@ namespace FridgesCore.Services
             {
                 throw new SecurityTokenException("Invalid token");
             }
-            var email = claims.FirstOrDefault(c => c.Type == "Email").Value;
-            var account = await _accountRepository.FindByEmailAsync(email);
+            var claimsId = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            var id = new Guid(claimsId);
+            var account = await _accountRepository.FindByIdAsync(id);
 
             if (existingRefreshToken.ExpireAt < now)
             {

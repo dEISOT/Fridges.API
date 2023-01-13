@@ -27,7 +27,7 @@ namespace FridgesData.Repositories
         }
 
         public async Task<RefreshTokenEntity> TryGetTokenAsync(string refreshToken)
-        {
+         {
             var result = await _db.RefreshTokens.FirstOrDefaultAsync(t => refreshToken.Equals(t.Token));
             return result;
         }

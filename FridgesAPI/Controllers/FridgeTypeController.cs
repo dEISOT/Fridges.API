@@ -7,14 +7,16 @@ namespace FridgesAPI.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class FridgeTypeController : ControllerBase
+    public class FridgeTypeController : BaseController
     {
-    //    [HttpPost]
-    //    public async Task<IActionResult> AddAsync([FromBody] FridgeTypeRequest model)
-    //    {
-    //        if (!ModelState.IsValid)
-    //            return BadRequest();
+        //[HttpPost]
+        //public async Task<IActionResult> AddAsync([FromBody] FridgeTypeRequest model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest();
 
-    //    }
+        //}
+
+
     }
 }

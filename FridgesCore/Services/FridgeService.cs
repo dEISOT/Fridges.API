@@ -11,22 +11,21 @@ namespace FridgesCore.Services
     public class FridgeService : IFridgeService
     {
         private readonly IFridgeRepository _fridgeRepository;
+        private readonly IFridgeTypeRepository _typeRepository;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
-        public FridgeService(IFridgeRepository fridgeRepository, ITokenService tokenService, IMapper mapper)
+        public FridgeService(IFridgeRepository fridgeRepository, ITokenService tokenService, IMapper mapper, IFridgeTypeRepository typeRepository)
         {
             _fridgeRepository = fridgeRepository;
             _tokenService = tokenService;
             _mapper = mapper;
+            _typeRepository = typeRepository;  
         }
 
-        public async Task<Guid> AddAsync(Fridge fridge, string accessToken)
-        {
-            var principal = _tokenService.DecodeJwtToken(accessToken);
-            var claims = principal.Claims.ToArray();
-            Guid id = new Guid(claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            fridge.AccountId = id;
+        public async Task<Guid> AddAsync(Fridge fridge, Guid accountId)
+        { 
+            fridge.AccountId = accountId;
 
             var entity = _mapper.Map<FridgeEntity>(fridge);
             var result = await _fridgeRepository.AddAsync(entity);
@@ -51,13 +50,11 @@ namespace FridgesCore.Services
             }
         }
 
-        public async Task<IEnumerable<FridgeResponse>> GetAsync(string id)
+        public async Task<FridgesWithTypes> GetAsync(string id, FridgeParameters fridgeParameters)
         {
-            //var principal = _tokenService.DecodeJwtToken(accessToken);
-            //var claims = principal.Claims.ToArray();
-            Guid Id = new Guid(id);
-            var entities = await _fridgeRepository.GetAsync(Id);
-            List<FridgeResponse> fridges = new List<FridgeResponse>();
+            Guid userId = new Guid(id);
+            var entities = await _fridgeRepository.GetAsync(userId, fridgeParameters);
+            List<FridgeResponse> list = new List<FridgeResponse>();
             foreach (var entity in entities)
             {
                 FridgeResponse item = new FridgeResponse()
@@ -67,9 +64,19 @@ namespace FridgesCore.Services
                     AccountName = entity.Account.Email,
                     Type = entity.FridgeType.Name
                 };
-                fridges.Add(item);
+                list.Add(item);
             }
-            return fridges;
+
+            var fridges = PagedList<FridgeResponse>.ToPagedList(list, fridgeParameters.PageNumber, fridgeParameters.PageSize);
+
+
+            FridgesWithTypes result = new FridgesWithTypes()
+            {
+                Fridges = fridges,
+                Types = await _typeRepository.GetAllAsync()
+            };
+
+            return result;
         }
 
     }

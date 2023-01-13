@@ -27,9 +27,12 @@ namespace FridgesData.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<FridgeEntity>> GetAsync(Guid accountId)
+        public async Task<PagedList<FridgeEntity>> GetAsync(Guid accountId, FridgeParameters fridgeParameters)
         {
-            var result = await _db.Fridges.Where(f => f.AccountId == accountId).ToListAsync();
+            var result = await PagedList<FridgeEntity>.ToPagedList(_db.Fridges.Where(f => f.AccountId == accountId),
+                fridgeParameters.PageNumber,
+                fridgeParameters.PageSize);
+
             return result;
         }
 

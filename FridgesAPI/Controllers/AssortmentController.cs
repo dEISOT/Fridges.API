@@ -7,7 +7,7 @@ namespace FridgesAPI.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AssortmentController : ControllerBase
+    public class AssortmentController : BaseController
     {
         private readonly IAssortmentService _assortmentService;
         private readonly IMapper _mapper;

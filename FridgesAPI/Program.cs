@@ -33,7 +33,9 @@ builder.Services.AddAuthentication(
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
-            ClockSkew = TimeSpan.Zero
+            ClockSkew = TimeSpan.Zero,
+            
+
         };
     });
 
@@ -49,6 +51,8 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<IFridgeTypeService, FridgeTypeService>();
+builder.Services.AddScoped<IFridgeTypeRepository, FridgeTypeRepository>();
 builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AccountProfile), typeof(ProductProfile), typeof(AssortmentProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))

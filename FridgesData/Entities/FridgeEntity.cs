@@ -6,7 +6,6 @@ namespace FridgesData.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        //public string? OwnerName { get; set; }
         public Guid TypeId { get; set; }
         public Guid AccountId { get; set; }
         [JsonIgnore]

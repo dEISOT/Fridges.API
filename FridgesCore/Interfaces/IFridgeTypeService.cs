@@ -2,7 +2,7 @@
 
 namespace FridgesCore.Interfaces
 {
-    public interface IFridgeType
+    public interface IFridgeTypeService
     {
         Task<IEnumerable<FridgeTypeEntity>> Get();
         Task<Guid> Add(FridgeTypeEntity entity);

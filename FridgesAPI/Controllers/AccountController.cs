@@ -1,9 +1,6 @@
 ﻿using FridgesCore.Interfaces;
 using FridgesModel.Request;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FridgesAPI.Controllers
@@ -11,7 +8,7 @@ namespace FridgesAPI.Controllers
     [Authorize]
     [Route("[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseController
     {
         private readonly IAccountService _accountService;
         private readonly ITokenService _tokenService;
@@ -32,21 +29,15 @@ namespace FridgesAPI.Controllers
                 return BadRequest();
             }
 
-            //validation for credentials
-
             var result = await _accountService.AuthenticateAsync(request);
-            //HttpContext.Response.Cookies.Append("accessToken", result.AccessToken.ToString(),
-            //    new CookieOptions
-            //    {
-            //        Secure = true,
-            //        HttpOnly = false,
-            //    });
+
             //HttpContext.Response.Cookies.Append("refreshToken", result.RefreshToken,
             //    new CookieOptions
             //    {
             //        Secure = true,
-            //        HttpOnly = false,
+            //        HttpOnly = true
             //    });
+
             return Ok(result);
         }
 
@@ -85,7 +76,7 @@ namespace FridgesAPI.Controllers
             return Ok(accountId);
 
         }
-       
+       [AllowAnonymous]
         [HttpGet("logout/{refreshToken}")]
         public async Task<IActionResult> Logout(string refreshToken)
         {
