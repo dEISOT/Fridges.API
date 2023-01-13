@@ -69,7 +69,7 @@ namespace FridgesCore.Services
 
             var fridges = PagedList<FridgeResponse>.ToPagedList(list, fridgeParameters.PageNumber, fridgeParameters.PageSize);
 
-
+            //eastern egg
             FridgesWithTypes result = new FridgesWithTypes()
             {
                 //Fridges = fridges,
