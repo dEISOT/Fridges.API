@@ -22,3 +22,15 @@ D:\FridgesAPI\FridgesData\obj\Debug\net6.0\FridgesData.dll
 D:\FridgesAPI\FridgesData\obj\Debug\net6.0\refint\FridgesData.dll
 D:\FridgesAPI\FridgesData\obj\Debug\net6.0\FridgesData.pdb
 D:\FridgesAPI\FridgesData\obj\Debug\net6.0\ref\FridgesData.dll
+D:\Fridges.API\FridgesData\bin\Debug\net6.0\FridgesData.deps.json
+D:\Fridges.API\FridgesData\bin\Debug\net6.0\FridgesData.dll
+D:\Fridges.API\FridgesData\bin\Debug\net6.0\FridgesData.pdb
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.csproj.AssemblyReference.cache
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.AssemblyInfoInputs.cache
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.AssemblyInfo.cs
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.csproj.CoreCompileInputs.cache
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.dll
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\refint\FridgesData.dll
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\FridgesData.pdb
+D:\Fridges.API\FridgesData\obj\Debug\net6.0\ref\FridgesData.dll

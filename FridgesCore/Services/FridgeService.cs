@@ -72,7 +72,7 @@ namespace FridgesCore.Services
 
             FridgesWithTypes result = new FridgesWithTypes()
             {
-                Fridges = fridges,
+                //Fridges = fridges,
                 Types = await _typeRepository.GetAllAsync()
             };
 
