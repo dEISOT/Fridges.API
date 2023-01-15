@@ -26,10 +26,9 @@ namespace FridgesData.Entities
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PagedList<T>(items, count, pageNumber, pageSize);
         }
-        public async static Task<PagedList<T>> ToPagedList(List<T> items, int pageNumber, int pageSize)
+        public static PagedList<T> ToPagedList(int totalAmount,List<T> items, int pageNumber, int pageSize)
         {
-            var count = items.Count();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            return new PagedList<T>(items, totalAmount, pageNumber, pageSize);
         }
     }
 }

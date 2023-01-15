@@ -66,13 +66,12 @@ namespace FridgesCore.Services
                 };
                 list.Add(item);
             }
+            var amount = _fridgeRepository.GetAmount(userId);
+            var fridges = PagedList<FridgeResponse>.ToPagedList(amount ,list, fridgeParameters.PageNumber, fridgeParameters.PageSize);
 
-            var fridges = PagedList<FridgeResponse>.ToPagedList(list, fridgeParameters.PageNumber, fridgeParameters.PageSize);
-
-            //eastern egg
             FridgesWithTypes result = new FridgesWithTypes()
             {
-                //Fridges = fridges,
+                Fridges = fridges,
                 Types = await _typeRepository.GetAllAsync()
             };
 
