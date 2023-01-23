@@ -53,7 +53,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IFridgeTypeService, FridgeTypeService>();
 builder.Services.AddScoped<IFridgeTypeRepository, FridgeTypeRepository>();
-builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AccountProfile), typeof(ProductProfile), typeof(AssortmentProfile));
+builder.Services.AddAutoMapper(typeof(FridgeProfile), typeof(AccountProfile), typeof(ProductProfile), typeof(AssortmentProfile), typeof(FridgeTypeProfile));
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
                                                               );

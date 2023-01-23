@@ -6,5 +6,6 @@ namespace FridgesData.Interfaces
     public interface IFridgeTypeRepository
     {
         Task<IEnumerable<FridgeTypeEntity>> GetAllAsync();
+        Task<Guid> AddAsync(FridgeTypeEntity entity);
     }
 }

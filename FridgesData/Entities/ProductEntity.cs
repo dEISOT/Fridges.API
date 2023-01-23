@@ -6,7 +6,6 @@ namespace FridgesData.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        [JsonIgnore]
         public int? DefaultQuantity { get; set; }
         [JsonIgnore]
         public virtual ICollection<AssortmentEntity> AssortmentEntities { get; set; }

@@ -14,6 +14,13 @@ namespace FridgesData.Repositories
             _db = db;
         }
 
+        public async Task<Guid> AddAsync(FridgeTypeEntity entity)
+        {
+            _db.Add(entity);
+            await _db.SaveChangesAsync();
+            return entity.Id;
+        }
+
         public async Task<IEnumerable<FridgeTypeEntity>> GetAllAsync()
         {
             var result = await _db.FridgeTypes.ToListAsync();
